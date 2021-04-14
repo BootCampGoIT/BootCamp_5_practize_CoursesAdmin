@@ -39,7 +39,7 @@ class ModuleDescription extends Component {
       <>
         {this.props.match.params.moduleId && (
           <>
-            <h2>Module description</h2>
+            <h3>Module description</h3>
             <p>Course: {this.props.match.params.courseName}</p>
             <p>Title: {this.state.module.moduleTitle}</p>
             <p>Description: {this.state.module.moduleDescription}</p>

@@ -1,7 +1,33 @@
+.coursesHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 10px 0;
+}
 .content {
   display: flex;
 }
 
 .leftSide {
   width: 40%;
+  margin-right: 20px;
+}
+.description {
+  border: 1px solid lightgray;
+  margin: 10px 0;
+  border-radius: 14px;
+  padding: 10px;
+  width: 100%;
+}
+
+.goBackButton {
+  display: block;
+  padding: 0 20px;
+  border-radius: 14px;
+  border: 1px solid cornflowerblue;
+  height: 25px;
+  background-color: cornflowerblue;
+  color: white;
+  text-transform: uppercase;
+  outline: none;
 }

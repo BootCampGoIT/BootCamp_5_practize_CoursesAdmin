@@ -4,7 +4,7 @@ import AdminPage from "../../pages/AdminPage";
 import AuthPage from "../../pages/AuthPage";
 import CoursesPage from "../../pages/CoursesPage";
 import HomePage from "../../pages/HomePage";
-import ModuleDescription from "../courses/ModuleDescription";
+import ModuleDescription from "../courses/moduleDescription/ModuleDescription";
 import { main } from "./Main.module.css";
 
 const Main = () => {

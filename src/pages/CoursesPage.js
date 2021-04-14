@@ -3,8 +3,14 @@ import React, { Component } from "react";
 import { Route } from "react-router-dom";
 
 import CoursesList from "../Components/courses/coursesList/CoursesList";
-import ModuleDescription from "../Components/courses/ModuleDescription";
-import { content, leftSide } from "./CoursesPage.module.css";
+import ModuleDescription from "../Components//courses/moduleDescription/ModuleDescription";
+import {
+  coursesHeader,
+  content,
+  leftSide,
+  description,
+  goBackButton,
+} from "./CoursesPage.module.css";
 
 class CoursesPage extends Component {
   state = {
@@ -41,15 +47,22 @@ class CoursesPage extends Component {
     });
   };
   render() {
+    const { prevPosition } = this.state;
     return (
       <>
-        <h2>Courses</h2>
-        <button onClick={this.goBack}>Go Back</button>
+        <div className={coursesHeader}>
+          <h2>Courses</h2>
+          {prevPosition && (
+            <button onClick={this.goBack} className={goBackButton}>
+              Go Back
+            </button>
+          )}
+        </div>
         <div className={content}>
           <div className={leftSide}>
             <CoursesList courses={this.state.courses} />
           </div>
-          <div className='description'>
+          <div className={description}>
             <Route
               path={`${this.props.match.url}/:courseName/:moduleId`}
               component={ModuleDescription}
