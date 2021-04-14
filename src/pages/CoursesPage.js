@@ -2,8 +2,9 @@ import axios from "axios";
 import React, { Component } from "react";
 import { Route } from "react-router-dom";
 
-import CoursesList from "../Components/courses/CoursesList";
+import CoursesList from "../Components/courses/coursesList/CoursesList";
 import ModuleDescription from "../Components/courses/ModuleDescription";
+import { content, leftSide } from "./CoursesPage.module.css";
 
 class CoursesPage extends Component {
   state = {
@@ -16,16 +17,18 @@ class CoursesPage extends Component {
       const response = await axios.get(
         `https://bootcamp5-default-rtdb.firebaseio.com/courses.json`
       );
-      const courses = Object.keys(response.data).map((key) => ({
-        name: key,
-        modules: [
-          ...Object.keys(response.data[key]).map((item) => ({
-            id: item,
-            ...response.data[key][item],
-          })),
-        ],
-      }));
-      this.setState({ courses });
+      if (response.data) {
+        const courses = Object.keys(response.data).map((key) => ({
+          name: key,
+          modules: [
+            ...Object.keys(response.data[key]).map((item) => ({
+              id: item,
+              ...response.data[key][item],
+            })),
+          ],
+        }));
+        this.setState({ courses });
+      }
     } catch (error) {
       console.log(error);
     }
@@ -42,8 +45,8 @@ class CoursesPage extends Component {
       <>
         <h2>Courses</h2>
         <button onClick={this.goBack}>Go Back</button>
-        <div style={{ display: "flex" }}>
-          <div className='leftSide'>
+        <div className={content}>
+          <div className={leftSide}>
             <CoursesList courses={this.state.courses} />
           </div>
           <div className='description'>

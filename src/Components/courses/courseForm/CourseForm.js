@@ -1,4 +1,12 @@
 import React, { Component } from "react";
+import {
+  courseForm,
+  courseFormSelect,
+  courseFormLabel,
+  courseFormInput,
+  courseFormArea,
+  courseFormButton,
+} from "./CourseForm.module.css";
 
 const coursesName = ["HTML", "JavaScript", "React", "Node"];
 
@@ -23,33 +31,44 @@ class CourseForm extends Component {
   render() {
     const { name, moduleTitle, moduleDescription } = this.state;
     return (
-      <form onSubmit={this.onHandleSubmit}>
-        <select name='name' value={name} onChange={this.onHandleChange}>
-          {coursesName.map((courseItem) => (
-            <option value={courseItem} key={courseItem}>
-              {courseItem}
-            </option>
-          ))}
-        </select>
-        <label>
+      <form onSubmit={this.onHandleSubmit} className={courseForm}>
+        <label className={courseFormLabel}>
+          Course name
+          <select
+            name='name'
+            value={name}
+            onChange={this.onHandleChange}
+            className={courseFormSelect}>
+            {coursesName.map((courseItem) => (
+              <option value={courseItem} key={courseItem}>
+                {courseItem}
+              </option>
+            ))}
+          </select>
+        </label>
+        <label className={courseFormLabel}>
           Title
           <input
             type='text'
             name='moduleTitle'
             value={moduleTitle}
             onChange={this.onHandleChange}
+            className={courseFormInput}
           />
         </label>
-        <label>
+        <label className={courseFormLabel}>
           Description
           <textarea
             type='text'
             name='moduleDescription'
             value={moduleDescription}
             onChange={this.onHandleChange}
+            className={courseFormArea}
           />
         </label>
-        <button type='submit'>Save module</button>
+        <button type='submit' className={courseFormButton}>
+          Save module
+        </button>
       </form>
     );
   }

@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { Component } from "react";
-import CourseForm from "../Components/courses/CourseForm";
+import CourseForm from "../Components/courses/courseForm/CourseForm";
 
 class AdminPage extends Component {
   state = {

@@ -1,0 +1,23 @@
+.coursesList {
+  list-style: none;
+}
+.coursesListItem {
+}
+
+.courseTitle {
+}
+
+.modulesList {
+  list-style: none;
+}
+.moduleListItem {
+}
+
+.moduleLink {
+  text-decoration: none;
+  color: cornflowerblue;
+}
+.activeModuleLink {
+  text-decoration: none;
+  color: red;
+}
