@@ -17,6 +17,11 @@ class CourseForm extends Component {
     ...initialState,
   };
 
+  componentDidUpdate(prevProps, prevState) {
+    prevProps.editedItem !== this.props.editedItem &&
+      this.setState({ ...this.props.editedItem });
+  }
+
   onHandleChange = (e) => {
     const { name, value } = e.target;
     this.setState({ [name]: value });
@@ -24,6 +29,7 @@ class CourseForm extends Component {
 
   onHandleSubmit = (e) => {
     e.preventDefault();
+    // if(this.props.editedItem.id ? editItem() :)
     this.props.addCourse(this.state);
     this.setState({ ...initialState });
   };

@@ -1,5 +1,5 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, withRouter } from "react-router-dom";
 import {
   coursesList,
   coursesListItem,
@@ -11,7 +11,7 @@ import {
 } from "./CoursesList.module.css";
 
 // { name: "HTML", modules: [{},{},{}] },
-const CoursesList = ({ courses }) => {
+const CoursesList = ({ courses, match }) => {
   return (
     <ul className={coursesList}>
       {courses.map((course) => (
@@ -21,7 +21,7 @@ const CoursesList = ({ courses }) => {
             {course.modules.map((moduleItem) => (
               <li className={moduleListItem} key={moduleItem.id}>
                 <NavLink
-                  to={`/courses/${course.name}/${moduleItem.id}`}
+                  to={`${match.url}/${course.name}/${moduleItem.id}`}
                   className={moduleLink}
                   activeClassName={activeModuleLink}>
                   {moduleItem.moduleTitle}
@@ -35,4 +35,4 @@ const CoursesList = ({ courses }) => {
   );
 };
 
-export default CoursesList;
+export default withRouter(CoursesList);

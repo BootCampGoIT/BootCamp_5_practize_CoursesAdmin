@@ -1,58 +1,38 @@
-import axios from "axios";
-import React, { Component } from "react";
-import CourseForm from "../Components/courses/courseForm/CourseForm";
+import React, { Suspense, Component } from "react";
+import { adminRoutes } from "../routes/adminRoutes";
+import { NavLink, Switch, Route } from "react-router-dom";
 
 class AdminPage extends Component {
-  state = {
-    courses: [
-      { name: "HTML", modules: [] },
-      { name: "JavaScript", modules: [] },
-      { name: "React", modules: [] },
-      { name: "Node", modules: [] },
-    ],
-  };
+  state = {};
 
-  //{ name: "HTML", moduleTitle: "элемент datalist", moduleDescription: "lorem dfghjk" }
-
-  addCourse = async (data) => {
-    try {
-      const response = await axios.post(
-        `https://bootcamp5-default-rtdb.firebaseio.com/courses/${data.name}.json`,
-        {
-          moduleTitle: data.moduleTitle,
-          moduleDescription: data.moduleDescription,
-        }
-      );
-      // console.log(response);
-      this.setState((prevState) => ({
-        courses: [
-          ...prevState.courses.map((courseItem) =>
-            courseItem.name === data.name
-              ? {
-                  ...courseItem,
-                  modules: [
-                    ...courseItem.modules,
-                    {
-                      id: response.data.name,
-                      moduleTitle: data.moduleTitle,
-                      moduleDescription: data.moduleDescription,
-                    },
-                  ],
-                }
-              : courseItem
-          ),
-        ],
-      }));
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
+  componentDidMount() {
+    this.props.history.push(`${this.props.match.url}${adminRoutes[0].path}`);
+  }
   render() {
+    const { match } = this.props;
     return (
       <>
-        <h2>Admin Page</h2>
-        <CourseForm addCourse={this.addCourse} />
+        <ul className='navigationList'>
+          {adminRoutes.map(({ name, path, exact }) => (
+            <li className='navigationListItem' key={path}>
+              <NavLink to={`${match.url}${path}`} exact={exact}>
+                {name}
+              </NavLink>
+            </li>
+          ))}
+        </ul>
+        <Suspense fallback={<h2>...loading</h2>}>
+          <Switch>
+            {adminRoutes.map(({ path, exact, component }) => (
+              <Route
+                path={`${match.url}${path}`}
+                exact={exact}
+                component={component}
+                key={path}
+              />
+            ))}
+          </Switch>
+        </Suspense>
       </>
     );
   }
