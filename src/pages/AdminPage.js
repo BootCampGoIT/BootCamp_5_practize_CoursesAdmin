@@ -1,6 +1,7 @@
 import React, { Suspense, Component } from "react";
 import { adminRoutes } from "../routes/adminRoutes";
 import { NavLink, Switch, Route } from "react-router-dom";
+import { list, listItem, link, activeLink } from "./AdminPage.module.css";
 
 class AdminPage extends Component {
   state = {};
@@ -12,10 +13,14 @@ class AdminPage extends Component {
     const { match } = this.props;
     return (
       <>
-        <ul className='navigationList'>
+        <ul className={list}>
           {adminRoutes.map(({ name, path, exact }) => (
-            <li className='navigationListItem' key={path}>
-              <NavLink to={`${match.url}${path}`} exact={exact}>
+            <li className={listItem} key={path}>
+              <NavLink
+                to={`${match.url}${path}`}
+                exact={exact}
+                className={link}
+                activeClassName={activeLink}>
                 {name}
               </NavLink>
             </li>

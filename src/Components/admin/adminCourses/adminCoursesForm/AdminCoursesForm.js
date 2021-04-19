@@ -6,7 +6,11 @@ import {
   courseFormInput,
   courseFormArea,
   courseFormButton,
-} from "./CourseForm.module.css";
+} from "./AdminCoursesForm.module.css";
+
+import { connect } from "react-redux";
+import { addModule } from "../../../../redux/courses/coursesActions";
+import axios from "axios";
 
 const coursesName = ["HTML", "JavaScript", "React", "Node"];
 
@@ -27,10 +31,20 @@ class CourseForm extends Component {
     this.setState({ [name]: value });
   };
 
-  onHandleSubmit = (e) => {
+  onHandleSubmit = async (e) => {
     e.preventDefault();
-    // if(this.props.editedItem.id ? editItem() :)
-    this.props.addCourse(this.state);
+    try {
+      const response = await axios.post(
+        `https://bootcamp5-default-rtdb.firebaseio.com/courses/${this.state.name}.json`,
+        {
+          moduleTitle: this.state.moduleTitle,
+          moduleDescription: this.state.moduleDescription,
+        }
+      );
+      this.props.addModule({ id: response.data.name, ...this.state });
+    } catch (error) {
+      console.log(error);
+    }
     this.setState({ ...initialState });
   };
 
@@ -65,7 +79,6 @@ class CourseForm extends Component {
         <label className={courseFormLabel}>
           Description
           <textarea
-            type='text'
             name='moduleDescription'
             value={moduleDescription}
             onChange={this.onHandleChange}
@@ -80,4 +93,4 @@ class CourseForm extends Component {
   }
 }
 
-export default CourseForm;
+export default connect(null, { addModule })(CourseForm);

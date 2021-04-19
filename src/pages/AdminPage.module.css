@@ -1,0 +1,19 @@
+.list {
+  display: flex;
+  list-style: none;
+  margin: 20px 0;
+}
+
+.listItem:not(:last-child) {
+  margin-right: 20px;
+}
+
+.link {
+  color: cornflowerblue;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.activeLink {
+  color: red;
+}

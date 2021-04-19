@@ -7,7 +7,7 @@ export const adminRoutes = [
     exact: true,
     component: lazy(() =>
       import(
-        "../Components/admin/AdminCourses" /*webpackChunkName: "AdminCourses" */
+        "../Components/admin/adminCourses/AdminCourses" /*webpackChunkName: "AdminCourses" */
       )
     ),
   },
@@ -17,7 +17,7 @@ export const adminRoutes = [
     exact: true,
     component: lazy(() =>
       import(
-        "../Components/admin/AdminGroups" /*webpackChunkName: "AdminGroups" */
+        "../Components/admin/adminGroups/AdminGroups" /*webpackChunkName: "AdminGroups" */
       )
     ),
   },

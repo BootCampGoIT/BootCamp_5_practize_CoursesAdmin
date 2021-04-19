@@ -11,10 +11,11 @@ class AuthForm extends Component {
   onHandleChange = (e) => {
     const { name, value } = e.target;
     this.setState({ [name]: value });
+
   };
+
   onHandleSubmit = (e) => {
     e.preventDefault();
-
     this.isSignUpForm()
       ? signUp({ ...this.state, returnSecureToken: true })
       : signIn({ ...this.state, returnSecureToken: true });
