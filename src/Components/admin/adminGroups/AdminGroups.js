@@ -1,9 +1,16 @@
 import React, { Component } from "react";
+import AdminGroupsForm from "./adminGroupsForm/AdminGroupsForm";
+import AdminGroupsList from "./adminGroupsList/AdminGroupsList";
 
 class AdminGroups extends Component {
   state = {};
   render() {
-    return <h2>Groups</h2>;
+    return (
+      <>
+        <AdminGroupsForm />
+        <AdminGroupsList />
+      </>
+    );
   }
 }
 

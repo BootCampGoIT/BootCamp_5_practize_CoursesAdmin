@@ -11,6 +11,7 @@ import {
 import { connect } from "react-redux";
 import { addModule } from "../../../../redux/courses/coursesActions";
 import axios from "axios";
+import { addModuleOperation } from "../../../../redux/courses/coursesOperations";
 
 const coursesName = ["HTML", "JavaScript", "React", "Node"];
 
@@ -33,18 +34,7 @@ class CourseForm extends Component {
 
   onHandleSubmit = async (e) => {
     e.preventDefault();
-    try {
-      const response = await axios.post(
-        `https://bootcamp5-default-rtdb.firebaseio.com/courses/${this.state.name}.json`,
-        {
-          moduleTitle: this.state.moduleTitle,
-          moduleDescription: this.state.moduleDescription,
-        }
-      );
-      this.props.addModule({ id: response.data.name, ...this.state });
-    } catch (error) {
-      console.log(error);
-    }
+    this.props.addModuleOperation(this.state);
     this.setState({ ...initialState });
   };
 
@@ -93,4 +83,11 @@ class CourseForm extends Component {
   }
 }
 
-export default connect(null, { addModule })(CourseForm);
+const mapDispatchToProps = (dispatch, ownProps) => {
+  return {
+    addModuleOperation: (moduleItem) => {
+      dispatch(addModuleOperation(moduleItem));
+    },
+  };
+};
+export default connect(null, mapDispatchToProps)(CourseForm);

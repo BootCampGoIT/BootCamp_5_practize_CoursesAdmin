@@ -9,35 +9,14 @@ import {
 } from "./AdminCoursesList.module.css";
 
 import { connect } from "react-redux";
-import axios from "axios";
-import { getCourses } from "../../../../redux/courses/coursesActions";
+
+import { getCoursesOperation } from "../../../../redux/courses/coursesOperations";
 
 class AdminCoursesList extends Component {
   componentDidMount() {
-    this.getCourses();
+    this.props.getCoursesOperation();
   }
 
-  getCourses = async () => {
-    try {
-      const response = await axios.get(
-        `https://bootcamp5-default-rtdb.firebaseio.com/courses.json`
-      );
-      if (response.data) {
-        const courses = Object.keys(response.data).map((key) => ({
-          name: key,
-          modules: [
-            ...Object.keys(response.data[key]).map((item) => ({
-              id: item,
-              ...response.data[key][item],
-            })),
-          ],
-        }));
-        this.props.getCourses(courses);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
   render() {
     return (
       <ul className={coursesList}>
@@ -66,4 +45,12 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { getCourses })(AdminCoursesList);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    getCoursesOperation: () => {
+      dispatch(getCoursesOperation())
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(AdminCoursesList);

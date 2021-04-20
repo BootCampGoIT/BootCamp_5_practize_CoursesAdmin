@@ -53,13 +53,15 @@ const resetCourseError = () => ({
   type: RESETERROR,
 });
 
-const setCourseLoadingTrue = () => ({
-  type: SETLOADINGTRUE,
-});
+const setCourseLoadingTrue = createAction("@courses/setLoadingTrue");
+const setCourseLoadingFalse = createAction("@courses/setLoadingFalse");
+// const setCourseLoadingTrue = () => ({
+//   type: SETLOADINGTRUE,
+// });
 
-const setCourseLoadingFalse = () => ({
-  type: SETLOADINGFALSE,
-});
+// const setCourseLoadingFalse = () => ({
+//   type: SETLOADINGFALSE,
+// });
 
 export {
   getCourses,

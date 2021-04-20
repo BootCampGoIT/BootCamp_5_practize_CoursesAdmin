@@ -18,6 +18,8 @@ import {
   addModule,
   deleteModule,
   editModule,
+  setCourseLoadingTrue,
+  setCourseLoadingFalse,
 } from "./coursesActions";
 
 const initialState = [
@@ -49,7 +51,7 @@ const coursesItems = createReducer(initialState, {
         : course
     ),
   ],
-  
+
   [editModule]: (state, { payload }) => [
     ...state.map((course) =>
       course.name === payload.name
@@ -131,12 +133,21 @@ const coursesError = (state = "", action) => {
       return state;
   }
 };
-const coursesLoading = (state = false, action) => {
-  switch (action.type) {
-    default:
-      return state;
-  }
-};
+// const coursesLoading = (state = false, action) => {
+//   switch (action.type) {
+//     case SETLOADINGTRUE:
+//       return true;
+//     case SETLOADINGFALSE:
+//       return false;
+//     default:
+//       return state;
+//   }
+// };
+
+const coursesLoading = createReducer(false, {
+  [setCourseLoadingTrue]: () => true,
+  [setCourseLoadingFalse]: () => false,
+});
 
 const coursesReducer = combineReducers({
   items: coursesItems,
